@@ -1,0 +1,66 @@
+<%- include("../partials/head.ejs") %>
+
+</head>
+<body>
+  <!-- Header -->
+   <%- include("../partials/header.ejs") %>
+
+
+
+   <div class="container py-5">
+    <h2 class="text-center mb-4">ব্লগ আপডেট করুন</h2>
+
+    <form action="/technology/update/<%= blog.id %>" method="POST" enctype="multipart/form-data">
+
+      <input type="hidden" name="currentImg" value="<%= blog.image %>">
+      <input type="hidden" name="type" value="<%= blog.type %>">
+
+      <div class="mb-3">
+        <label for="title" class="form-label">ব্লগের শিরোনাম</label>
+        <input
+          type="text"
+          id="title"
+          name="title"
+          class="form-control fontal"
+          value="<%= blog.title %>"
+          required
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="description" class="form-label">বর্ণনা</label>
+        <textarea
+          id="description"
+          name="description"
+          class="form-control fontal"
+          rows="5"
+          required
+        ><%= blog.description %></textarea>
+      </div>
+
+      <div class="mb-3">
+        <label for="image" class="form-label">ছবি পরিবর্তন (প্রয়োজনে)</label>
+        <input type="file" name="technologyImage" id="image" class="form-control fontal" accept=".png, .jpg, .jpeg" />
+      </div>
+
+      <% if (blog.image) { %>
+        <div class="mb-3">
+          <label class="form-label d-block">বর্তমান ছবি:</label>
+          <img
+            src="<%= blog.image %>"
+            alt="Current Image"
+            style="height: 100px; width: 120px; object-fit: cover; border-radius: 8px;"
+          />
+        </div>
+      <% } %>
+
+      <button type="submit" class="button-sky">আপডেট করুন</button>
+      <a href="/getUpdateTechnology" class="button-earth ms-2">বাতিল</a>
+    </form>
+  </div>
+  <!--Footer-->
+   <%- include("../partials/footer.ejs") %>
+  <!-- JS -->
+ <script src="/js/header.js"></script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<%- include("../partials/head.ejs") %>
+
+<style>
+  .td{
+    display: none;
+  }
+ 
+  @media (max-width: 768px){
+    .h_tr{
+      display: none;
+    }
+    .tr{
+      display: flex;
+      flex-direction: column;
+    }
+    .td{
+      display: block;
+      display: flex;
+    }
+    
+    form{
+      margin-top: 10px;
+    }
+  }
+  
+</style>
+</head>
+<body>
+  <%- include("../partials/header.ejs") %>
+
+  <div class="container py-5">
+    <h2 class="mb-4 text-center fontal">Contact Messages</h2>
+
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped align-middle">
+        <thead class="table-dark">
+          <tr class="h_tr">
+            <th class="fontal">Name</th>
+            <th class="fontal">Email</th>
+            <th class="fontal">Number</th>
+            <th class="fontal">Message</th>
+            <th class="fontal">Action</th>
+          </tr>
+        </thead>
+        <tbody class="p-2">
+          <% if (contacts.length > 0) { %>
+            <% contacts.forEach(contact => { %>
+              <tr class="tr">
+                <td class="fontal" style="text-wrap: nowrap;"><strong class="fontal td">Name:</strong> <%= contact.name %></td>
+                <td class="fontal"> <strong class="fontal td">email:</strong> <%= contact.email %></td>
+                <td class="fontal"> <strong class="fontal td">Number:</strong> <%= contact.number %></td>
+                <td class="fontal"><%- contact.message.replace(/\n/g, '<br>') %></td>
+                <td class="fontal">
+                  <form action="/contacts/delete/<%= contact.id %>" method="POST" onsubmit="return confirm('Are you sure you want to delete this contact?');">
+                    <button type="submit" class="btn btn-sm btn-danger" title="Delete">🗑️</button>
+                  </form>
+                </td>
+              </tr>
+            <% }) %>
+          <% } else { %>
+            <tr><td colspan="5" class="text-center fontal">No contacts found.</td></tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <%- include("../partials/footer.ejs") %>
+</body>
+</html>

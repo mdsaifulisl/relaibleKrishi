@@ -1,0 +1,41 @@
+<%- include("../partials/head.ejs") %>
+
+</head>
+<body>
+  <!-- Header -->
+  <%- include("../partials/header.ejs") %>
+
+  <div class="container py-5" style="max-width: 700px;">
+    <h2 class="text-center mb-5 fw-bold text-primary">নতুন ব্লগ যুক্ত করুন</h2>
+
+    <form action="/blog/addBlogs" method="POST" enctype="multipart/form-data" class="shadow p-4 rounded bg-light">
+      
+      <div class="mb-4">
+        <label for="title" class="form-label fw-semibold">ব্লগের শিরোনাম <span class="text-danger">*</span></label>
+        <input type="text" name="title" id="title" class="form-control fontal" placeholder="শিরোনাম লিখুন" required>
+      </div>
+
+      <div class="mb-4">
+        <label for="description" class="form-label fw-semibold">বর্ণনা <span class="text-danger">*</span></label>
+        <textarea name="description" id="description" class="form-control fontal" rows="5" placeholder="বিস্তারিত লিখুন..." required></textarea>
+      </div>
+
+      <div class="mb-4">
+        <label for="image" class="form-label fw-semibold">ছবি আপলোড করুন</label>
+        <input type="file" name="image" id="image" class="form-control fontal" accept=".png, .jpg, .jpeg">
+      </div>
+
+      <div class="text-center">
+        <button type="submit" class="button-sky px-4 py-2">+ ব্লগ যুক্ত করুন</button>
+      </div>
+      
+    </form>
+  </div>
+
+  
+  <!--Footer-->
+   <%- include("../partials/footer.ejs") %>
+  <!-- JS -->
+ <script src="/js/header.js"></script>
+</body>
+</html>

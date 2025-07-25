@@ -1,0 +1,148 @@
+<%- include("../partials/head.ejs") %>
+<link rel="stylesheet" href="/css/contact.css">
+</head>
+<body>
+  <!-- Header -->
+  <%- include("../partials/header.ejs") %>
+
+  <!-- All Top Heading  -->
+  <div class="all-headings mb-4">
+    <h1 class="fontal">যোগাযোগ করুন</h1>
+  </div>
+  <!-- All Top Heading  end-->
+
+  <% if(isLoggedIn) { %>
+  <div class="contact_form container mt-5">
+    <a class="add_btn" href="/contacts">Contact form</a>
+  </div>
+  <% } %>
+
+
+
+  <!-- Contact Section -->
+  <section class="contact-section py-5" id="contact">
+    <div class="container">
+      <div class="row g-4">
+        <!-- Left: Contact Form -->
+        <div class="col-md-6">
+          <div class="p-4 bg-white rounded shadow-sm h-100">
+            <h2 class="section-title text-center mb-4">যোগাযোগের তথ্য</h2>
+            <ul class="list-unstyled mb-4">
+              <li class="mb-2 fontal"><strong>মোবাইল:</strong> +880 1893 30817</li>
+              <li class="mb-2 fontal"><strong>ইমেইল:</strong>mdo342412@gmail.com</li>
+              <li class="mb-2 fontal"><strong>ঠিকানা:</strong> উচিৎপুরা, আড়াইহাজার, নারায়ণগঞ্জ</li>
+            </ul>
+
+            <div class="d-flex flex-wrap gap-2 justify-content-start">
+              <a href="https://www.facebook.com/share/1FkfCKPpGr/" class="btn social-icon facebook fontal">Facebook</a>
+              <a href="https://wa.me/8801883135933" class="btn social-icon whatsapp fontal">WhatsApp</a>
+              <a href="#" class="btn social-icon youtube fontal">YouTube</a>
+            </div>
+          </div>
+        </div> 
+
+
+         <!-- Right: Contact Info -->
+        <div class="col-md-6">
+          <div class="p-4 bg-white rounded shadow-sm h-100">
+            <h2 class="section-title text-center mb-4">যোগাযোগ ফর্ম</h2>
+            <form action="/contact" method="POST" class="contact-form">
+              <div class="mb-3">
+                <label for="name" class="form-label">নাম <span class="text-danger">*</span></label>
+                <input type="text" class="form-control fontal" id="name" name="name" required>
+              </div>
+
+              <div class="mb-3">
+                <label for="email" class="form-label">ইমেইল</label>
+                <input type="email" class="form-control fontal" id="email" name="email">
+              </div>
+
+              <div class="mb-3">
+                <label for="phone" class="form-label">মোবাইল <span class="text-danger">*</span></label>
+                <input type="number" class="form-control fontal" id="phone" name="number" required>
+              </div>
+
+              <div class="mb-3">
+                <label for="message" class="form-label">বার্তা <span class="text-danger">*</span></label>
+                <textarea class="form-control fontal" id="message" name="message" rows="4" required></textarea>
+              </div>
+
+              <button type="submit" class="btn button-earth w-100">বার্তা পাঠান</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Contact Section End -->
+
+
+  <!-- location -->
+    <div class="contact_heading container mb-5">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d228.24081086563922!2d90.69369728176882!3d23.752621834495038!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x375449e6c886520f%3A0x37dc4af67dee6e05!2z4Kac4Ka54Ka_4KawIOCmnOCnh-CmqOCmvuCmsOCnh-CmsiDgprjgp43gpp_gp4vgprA!5e0!3m2!1sen!2sbd!4v1752697578279!5m2!1sen!2sbd" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  <!-- location End -->
+
+<!-- ======================= -->
+  <section class="disease-section">
+    <div class="disease-slider-wrapper" id="sliderWrapper">
+      <div class="disease-slider" id="diseaseSlider">
+
+        <% if (diseases.length > 0) { %>
+          <% diseases.forEach(function(disease) { %> 
+            <div class="disease-item">
+              <div class="disease-item-inner">
+                <div class="disease-item-img">
+                  <img src="<%= disease.image %>" alt="<%= disease.title %>">
+                </div>
+                <div class="disease-item-content">
+                  <h3><%= disease.title %></h3>
+                  <p>
+                    <%= disease.description && disease.description.length > 80 
+                          ? disease.description.substring(0, 80) + "..." 
+                          : disease.description || '' 
+                    %>
+                  </p>
+
+                  <div>
+                    <a href="/diseaseDtls/<%= disease.id %>" class="button-earth">বিস্তারিত</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% }) %>
+        <% } else { %>
+          <h1>This section not found</h1>
+        <% } %>
+
+        <!-- Card 1 -->
+
+      </div>
+    </div>
+    <div class="slider-controls <%= diseases.length > 4 ? 'show-on-desktop' : '' %>">
+      <button onclick="scrollSlider(-1)">←</button>
+      <button onclick="scrollSlider(1)">→</button>
+    </div>
+
+    
+  </section>
+  
+  <!--Footer-->
+   <%- include("../partials/footer.ejs") %>
+  <!-- JS -->
+ <script src="/js/header.js"></script>
+
+  <script>
+    function scrollSlider(direction) {
+      const slider = document.getElementById("sliderWrapper");
+      const scrollAmount = 300; 
+      slider.scrollBy({
+        left: direction * scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  </script>
+</body>
+</html>
+
+

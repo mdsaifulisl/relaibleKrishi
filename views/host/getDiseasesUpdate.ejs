@@ -1,0 +1,66 @@
+<%- include("../partials/head.ejs") %>
+
+</head>
+<body>
+  <!-- Header -->
+   <%- include("../partials/header.ejs") %>
+
+
+
+   <div class="container py-5">
+    <h2 class="text-center mb-4">রোগবালি আপডেট করুন</h2>
+
+    <form action="/disease/update/<%= disease.id %>" method="POST" enctype="multipart/form-data">
+
+      <input type="hidden" name="currentImg" value="<%= disease.image %>">
+      <input type="hidden" name="type" value="<%= disease.type %>">
+
+      <div class="mb-3">
+        <label for="title" class="form-label">রোগবালাই এর শিরোনাম</label>
+        <input
+          type="text"
+          id="title"
+          name="title"
+          class="form-control fontal"
+          value="<%= disease.title %>"
+          required
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="description" class="form-label">বর্ণনা</label>
+        <textarea
+          id="description"
+          name="description"
+          class="form-control fontal"
+          rows="5"
+          required
+        ><%= disease.description %></textarea>
+      </div>
+
+      <div class="mb-3">
+        <label for="image" class="form-label">ছবি পরিবর্তন (প্রয়োজনে)</label>
+        <input type="file" name="diseaseImage" id="image" class="form-control fontal" accept=".png, .jpg, .jpeg" />
+      </div>
+
+      <% if (disease.image) { %>
+        <div class="mb-3">
+          <label class="form-label d-block">বর্তমান ছবি:</label>
+          <img
+            src="<%= disease.image %>"
+            alt="Current Image"
+            style="height: 100px; width: 120px; object-fit: cover; border-radius: 8px;"
+          />
+        </div>
+      <% } %>
+
+      <button type="submit" class="button-sky">আপডেট করুন</button>
+      <a href="/getUpdateDisease" class="button-earth ms-2">বাতিল</a>
+    </form>
+  </div>
+  <!--Footer-->
+   <%- include("../partials/footer.ejs") %>
+  <!-- JS -->
+ <script src="/js/header.js"></script>
+</body>
+</html>
